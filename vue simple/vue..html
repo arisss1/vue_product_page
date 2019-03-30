@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width">
+	<title>my vue</title>
+<style type="text/css">
+	
+.product-image {
+	float: left;
+}
+button {
+	background-color: blue;
+	padding: 15px 20px;
+	color: white;
+}
+
+.disabledbutton {
+	background-color: white;
+}
+
+.out {
+	text-decoration: line-through;
+}
+
+</style>
+</head>
+
+<body>
+<div class="nav-bar"></div>
+<div id="app">
+<div class="product">
+<div class="product-image">
+	<img v-bind:src="image">
+</div>
+
+
+<div class="product-info">
+	<h1>{{product}}</h1>
+	<p v-if="Instock">In stock</p>
+	<p v-else :class="{out: !Instock}">Out of stock</p>
+	<ul>
+	<li v-for="detail in details">{{detail}}</li>	
+	</ul>
+	<div v-for="variant in variants" :key="variant.variantid">
+		<p @mouseover="updateProduct(variant.variantimage)">{{variant.variantcolor}}</p>
+	</div>
+	<button v-on:click="addToCart" :disabled="!Instock" :class="{disabledbutton: !Instock}">Add to cart</button>
+<div class="cart">
+	<p>cart{{cart}}</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="main.js"></script>
+</body>
+</html>
